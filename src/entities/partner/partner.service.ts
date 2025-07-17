@@ -2,6 +2,7 @@ import {QueryTypes, Sequelize} from 'sequelize';
 import models from '../../db/models.js';
 import {AppError} from '../../errors/app-error.js';
 import {CreatePartnerDto, UpdatePartnerDto} from './partner.types.js';
+import sequelize from '../../db/sequelize.js';
 
 class PartnerService {
 	constructor(private readonly partnerModel = models.Partner, private readonly sequelize: Sequelize) {}
@@ -33,7 +34,7 @@ class PartnerService {
 	async getBestCustomerPerCompany() {
 		return await this.sequelize.query(
 			`
-			SELECT 
+			SELECT
 				o."companyId",
 				p."id" AS "partnerId",
 				p."name" AS "partnerName",
@@ -49,4 +50,4 @@ class PartnerService {
 	}
 }
 
-export default PartnerService;
+export default new PartnerService(models.Partner, sequelize);

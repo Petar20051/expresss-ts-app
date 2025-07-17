@@ -4,11 +4,10 @@ import {validate} from '../../middlewares/validate.js';
 import {createUserSchema, updateUserSchema, userIdParamSchema} from './user.schemas.js';
 
 const router = express.Router();
-const userService = new UserService();
 
 router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
-		const users = await userService.getAllUsers();
+		const users = await UserService.getAllUsers();
 		res.json(users);
 	} catch (error) {
 		next(error);
@@ -17,7 +16,7 @@ router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 
 router.get('/:id', validate({params: userIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const user = await userService.getUserById(req.params.id);
+		const user = await UserService.getUserById(req.params.id);
 		res.json(user);
 	} catch (error) {
 		next(error);
@@ -26,7 +25,7 @@ router.get('/:id', validate({params: userIdParamSchema}), async (req: Request, r
 
 router.post('/', validate({body: createUserSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const user = await userService.createUser(req.body);
+		const user = await UserService.createUser(req.body);
 		res.status(201).json(user);
 	} catch (error) {
 		next(error);
@@ -38,7 +37,7 @@ router.put(
 	validate({params: userIdParamSchema, body: updateUserSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await userService.updateUser(req.params.id, req.body);
+			const updated = await UserService.updateUser(req.params.id, req.body);
 			res.json(updated);
 		} catch (error) {
 			next(error);
@@ -48,7 +47,7 @@ router.put(
 
 router.delete('/:id', validate({params: userIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		await userService.deleteUser(req.params.id);
+		await UserService.deleteUser(req.params.id);
 		res.status(204).send();
 	} catch (error) {
 		next(error);

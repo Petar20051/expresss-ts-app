@@ -30,4 +30,4 @@ class OrderItemService {
 	}
 }
 
-export default OrderItemService;
+export default new OrderItemService();

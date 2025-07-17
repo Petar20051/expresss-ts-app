@@ -30,4 +30,4 @@ class InvoiceService {
 	}
 }
 
-export default InvoiceService;
+export default new InvoiceService();

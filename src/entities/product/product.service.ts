@@ -2,6 +2,7 @@ import {QueryTypes, Sequelize} from 'sequelize';
 import models from '../../db/models.js';
 import {AppError} from '../../errors/app-error.js';
 import {CreateProductDto, UpdateProductDto} from './product.types.js';
+import sequelize from '../../db/sequelize.js';
 
 class ProductService {
 	constructor(private readonly productModel = models.Product, private readonly sequelize: Sequelize) {}
@@ -91,4 +92,4 @@ class ProductService {
 	}
 }
 
-export default ProductService;
+export default new ProductService(models.Product, sequelize);

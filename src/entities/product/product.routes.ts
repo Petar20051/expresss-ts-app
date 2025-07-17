@@ -2,15 +2,12 @@ import express, {Request, Response, NextFunction} from 'express';
 import ProductService from './product.service.js';
 import {validate} from '../../middlewares/validate.js';
 import {createProductSchema, updateProductSchema, productIdParamSchema} from './product.schemas.js';
-import models from '../../db/models.js';
-import sequelize from '../../db/sequelize.js';
 
 const router = express.Router();
-const productService = new ProductService(models.Product, sequelize);
 
 router.get('/best-sellers', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
-		const bestSellers = await productService.getBestSellers();
+		const bestSellers = await ProductService.getBestSellers();
 		res.json(bestSellers);
 	} catch (error) {
 		next(error);
@@ -19,7 +16,7 @@ router.get('/best-sellers', async (_req: Request, res: Response, next: NextFunct
 
 router.get('/highest-stock', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
-		const highestStock = await productService.getHighestStockPerWarehouse();
+		const highestStock = await ProductService.getHighestStockPerWarehouse();
 		res.json(highestStock);
 	} catch (error) {
 		next(error);
@@ -28,7 +25,7 @@ router.get('/highest-stock', async (_req: Request, res: Response, next: NextFunc
 
 router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
-		const products = await productService.getAllProducts();
+		const products = await ProductService.getAllProducts();
 		res.json(products);
 	} catch (error) {
 		next(error);
@@ -37,7 +34,7 @@ router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 
 router.get('/:id', validate({params: productIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const product = await productService.getProductById(req.params.id);
+		const product = await ProductService.getProductById(req.params.id);
 		res.json(product);
 	} catch (error) {
 		next(error);
@@ -46,7 +43,7 @@ router.get('/:id', validate({params: productIdParamSchema}), async (req: Request
 
 router.post('/', validate({body: createProductSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const product = await productService.createProduct(req.body);
+		const product = await ProductService.createProduct(req.body);
 		res.status(201).json(product);
 	} catch (error) {
 		next(error);
@@ -58,7 +55,7 @@ router.put(
 	validate({params: productIdParamSchema, body: updateProductSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await productService.updateProduct(req.params.id, req.body);
+			const updated = await ProductService.updateProduct(req.params.id, req.body);
 			res.json(updated);
 		} catch (error) {
 			next(error);
@@ -68,7 +65,7 @@ router.put(
 
 router.delete('/:id', validate({params: productIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		await productService.deleteProduct(req.params.id);
+		await ProductService.deleteProduct(req.params.id);
 		res.status(204).send();
 	} catch (error) {
 		next(error);

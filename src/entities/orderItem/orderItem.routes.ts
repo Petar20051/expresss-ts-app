@@ -4,11 +4,10 @@ import {validate} from '../../middlewares/validate.js';
 import {createOrderItemSchema, updateOrderItemSchema, orderItemIdParamSchema} from './orderItem.schemas.js';
 
 const router = express.Router();
-const orderItemService = new OrderItemService();
 
 router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
-		const items = await orderItemService.getAllOrderItems();
+		const items = await OrderItemService.getAllOrderItems();
 		res.json(items);
 	} catch (error) {
 		next(error);
@@ -17,7 +16,7 @@ router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 
 router.get('/:id', validate({params: orderItemIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const item = await orderItemService.getOrderItemById(req.params.id);
+		const item = await OrderItemService.getOrderItemById(req.params.id);
 		res.json(item);
 	} catch (error) {
 		next(error);
@@ -26,7 +25,7 @@ router.get('/:id', validate({params: orderItemIdParamSchema}), async (req: Reque
 
 router.post('/', validate({body: createOrderItemSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const item = await orderItemService.createOrderItem(req.body);
+		const item = await OrderItemService.createOrderItem(req.body);
 		res.status(201).json(item);
 	} catch (error) {
 		next(error);
@@ -38,7 +37,7 @@ router.put(
 	validate({params: orderItemIdParamSchema, body: updateOrderItemSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await orderItemService.updateOrderItem(req.params.id, req.body);
+			const updated = await OrderItemService.updateOrderItem(req.params.id, req.body);
 			res.json(updated);
 		} catch (error) {
 			next(error);
@@ -48,7 +47,7 @@ router.put(
 
 router.delete('/:id', validate({params: orderItemIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		await orderItemService.deleteOrderItem(req.params.id);
+		await OrderItemService.deleteOrderItem(req.params.id);
 		res.status(204).send();
 	} catch (error) {
 		next(error);
