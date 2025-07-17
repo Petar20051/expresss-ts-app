@@ -1,0 +1,17 @@
+import {z} from 'zod';
+
+export const productIdParamSchema = z.object({
+	id: z.uuid(),
+});
+
+export const createProductSchema = z.object({
+	companyId: z.uuid(),
+	name: z.string().min(1).max(100),
+	sku: z.string().min(1).max(50),
+	productType: z.enum(['solid', 'liquid']),
+	description: z.string().optional(),
+	basePrice: z.number().min(0),
+	modifiedByUserId: z.uuid().nullable().optional(),
+});
+
+export const updateProductSchema = createProductSchema.partial();

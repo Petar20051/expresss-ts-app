@@ -7,31 +7,38 @@
 		"start": "node --env-file .env dist/index.js",
 		"build": "tsc",
 		"type-check": "tsc --noEmit",
-		"lint": "eslint .",
-		"lint:fix": "eslint --fix .",
+		"lint": "eslint . --ext .ts",
+		"lint:fix": "eslint . --ext .ts --fix",
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"sequelize": "sequelize-cli --config sequelize.config.js"
+		"migrate": "sequelize-cli db:migrate --config config/sequelize.config.cjs",
+		"migrate:undo": "sequelize-cli db:migrate:undo --config config/sequelize.config.cjs",
+		"migrate:undo:all": "npx sequelize-cli db:migrate:undo:all --config config/sequelize.config.cjs",
+		"seed": "sequelize-cli db:seed:all --config config/sequelize.config.cjs",
+		"seed:undo": "sequelize-cli db:seed:undo:all --config config/sequelize.config.cjs"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"description": "",
 	"dependencies": {
+		"dotenv": "^17.2.0",
 		"express": "^5.1.0",
 		"pg": "^8.16.3",
-		"sequelize": "^6.37.7"
+		"sequelize": "^6.37.7",
+		"zod": "^4.0.5"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.31.0",
 		"@tsconfig/node22": "^22.0.2",
 		"@types/express": "^5.0.3",
-		"@types/node": "^24.0.13",
+		"@types/node": "^24.0.14",
 		"@types/sequelize": "^4.28.20",
 		"eslint": "^9.31.0",
 		"eslint-plugin-perfectionist": "^4.15.0",
 		"sequelize-cli": "^6.6.3",
+		"ts-node": "^10.9.2",
 		"tsx": "^4.20.3",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.37.0"

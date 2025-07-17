@@ -4,6 +4,13 @@
 		"outDir": "./dist",
 		"rootDir": "./"
 	},
-	"include": ["**/*.ts", "src/config/sequalize.config.ts"],
+	"include": [
+		"**/*.ts",
+		"src/config/sequalize.config.ts",
+		"config/sequalize.config.cjs",
+		"config/config.cjs",
+		"migrations/20250715111304-create-user.cjs",
+		"migrations/20250715111233-create-company.cjsny.cjs"
+	],
 	"exclude": ["dist"]
 }
