@@ -8,7 +8,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
-      "companyId": {
+      companyId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -18,11 +18,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      "orderType": {
+      orderType: {
         type: Sequelize.ENUM('shipment', 'delivery'),
         allowNull: false,
       },
-      "partnerId": {
+      partnerId: {
         type: Sequelize.UUID,
         references: {
           model: 'Partner',
@@ -31,7 +31,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
       },
-      "warehouseId": {
+      warehouseId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -49,20 +49,20 @@ module.exports = {
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "createdAt": {
+      createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "updatedAt": {
+      updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "deletedAt": {
+      deletedAt: {
         type: Sequelize.DATE,
       },
-      "modifiedByUserId": {
+      modifiedByUserId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

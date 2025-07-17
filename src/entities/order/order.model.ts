@@ -29,49 +29,60 @@ export default (sequelize: Sequelize) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 				primaryKey: true,
+				field: 'id',
 			},
 			companyId: {
 				type: DataTypes.UUID,
 				allowNull: false,
+				field: 'companyId',
 			},
 			orderType: {
 				type: DataTypes.ENUM('shipment', 'delivery'),
 				allowNull: false,
+				field: 'orderType',
 			},
 			partnerId: {
 				type: DataTypes.UUID,
 				allowNull: true,
+				field: 'partnerId',
 			},
 			warehouseId: {
 				type: DataTypes.UUID,
 				allowNull: false,
+				field: 'warehouseId',
 			},
 			notes: {
 				type: DataTypes.TEXT,
 				allowNull: true,
+				field: 'notes',
 			},
 			date: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'date',
 			},
 			createdAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'createdAt',
 			},
 			updatedAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'updatedAt',
 			},
 			deletedAt: {
 				type: DataTypes.DATE,
 				allowNull: true,
+				field: 'deletedAt',
 			},
 			modifiedByUserId: {
 				type: DataTypes.UUID,
 				allowNull: false,
+				field: 'modifiedByUserId',
 			},
 		},
 		{
@@ -82,6 +93,20 @@ export default (sequelize: Sequelize) => {
 			paranoid: true,
 		}
 	);
+	Order.addHook('afterCreate', async (order, {transaction}) => {
+		const {Invoice} = sequelize.models;
+
+		if (order.dataValues.partnerId && order.dataValues.orderType === 'shipment') {
+			await Invoice.create(
+				{
+					orderId: order.dataValues.id,
+					status: 'unpaid',
+					modifiedByUserId: order.dataValues.modifiedByUserId,
+				},
+				{transaction}
+			);
+		}
+	});
 
 	return Order;
 };

@@ -11,7 +11,7 @@ export default (sequelize: Sequelize) => {
 		declare createdAt: CreationOptional<Date>;
 		declare updatedAt: CreationOptional<Date>;
 		declare deletedAt: CreationOptional<Date | null>;
-		declare modifiedByUserId: ForeignKey<string> | null;
+		declare modifiedByUserId: ForeignKey<string>;
 
 		static associate(models: Models) {
 			Invoice.belongsTo(models.Order, {
@@ -32,42 +32,50 @@ export default (sequelize: Sequelize) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 				primaryKey: true,
+				field: 'id',
 			},
 			invoiceNumber: {
 				type: DataTypes.STRING(50),
-				allowNull: false,
-				unique: true,
+				field: 'invoiceNumber',
+				autoIncrement: true,
 			},
 			orderId: {
 				type: DataTypes.UUID,
 				allowNull: false,
+				field: 'orderId',
 			},
 			status: {
 				type: DataTypes.ENUM('unpaid', 'paid', 'overdue'),
 				allowNull: false,
+				field: 'status',
 			},
 			date: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'date',
 			},
 			createdAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'createdAt',
 			},
 			updatedAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'updatedAt',
 			},
 			deletedAt: {
 				type: DataTypes.DATE,
 				allowNull: true,
+				field: 'deletedAt',
 			},
 			modifiedByUserId: {
 				type: DataTypes.UUID,
 				allowNull: false,
+				field: 'modifiedByUserId',
 			},
 		},
 		{

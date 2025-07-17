@@ -8,7 +8,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
-      "companyId": {
+      companyId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -26,24 +26,24 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
-      "supportedType": {
+      supportedType: {
         type: Sequelize.ENUM('solid', 'liquid'),
         allowNull: false,
       },
-      "createdAt": {
+      createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "updatedAt": {
+      updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "deletedAt": {
+      deletedAt: {
         type: Sequelize.DATE,
       },
-      "modifiedByUserId": {
+      modifiedByUserId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

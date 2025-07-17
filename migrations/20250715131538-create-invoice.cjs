@@ -12,11 +12,9 @@ module.exports = {
       invoiceNumber: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
-        allowNull: false,
-        unique: true,
       }
       ,
-      "orderId": {
+      orderId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -35,20 +33,20 @@ module.exports = {
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "createdAt": {
+      createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "updatedAt": {
+      updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "deletedAt": {
+      deletedAt: {
         type: Sequelize.DATE,
       },
-      "modifiedByUserId": {
+      modifiedByUserId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

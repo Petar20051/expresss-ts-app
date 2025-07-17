@@ -8,7 +8,7 @@ module.exports = {
         defaultValue: Sequelize.UUDV4,
         primaryKey: true,
       },
-      "companyId": {
+      companyId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -27,31 +27,31 @@ module.exports = {
         unique: true,
         allowNull: false,
       },
-      "productType": {
+      productType: {
         type: Sequelize.ENUM('solid', 'liquid'),
         allowNull: false,
       },
       description: {
         type: Sequelize.TEXT,
       },
-      "basePrice": {
+      basePrice: {
         type: Sequelize.DECIMAL(12, 2),
         allowNull: false,
       },
-      "createdAt": {
+      createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "updatedAt": {
+      updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "deletedAt": {
+      deletedAt: {
         type: Sequelize.DATE,
       },
-      "modifiedByUserId": {
+      modifiedByUserId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {

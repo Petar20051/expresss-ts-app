@@ -50,33 +50,40 @@ export default (sequelize: Sequelize) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 				primaryKey: true,
+				field: 'id',
 			},
 			name: {
 				type: DataTypes.STRING(100),
 				allowNull: false,
+				field: 'name',
 			},
 			emailDomain: {
 				type: DataTypes.STRING(100),
 				allowNull: false,
 				unique: true,
+				field: 'emailDomain',
 			},
 			modifiedByUserId: {
 				type: DataTypes.UUID,
 				allowNull: true,
+				field: 'modifiedByUserId',
 			},
 			createdAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'createdAt',
 			},
 			updatedAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'updatedAt',
 			},
 			deletedAt: {
 				type: DataTypes.DATE,
 				allowNull: true,
+				field: 'deletedAt',
 			},
 		},
 		{

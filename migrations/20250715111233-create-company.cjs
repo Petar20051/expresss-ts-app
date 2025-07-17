@@ -12,26 +12,26 @@ module.exports = {
 				type: Sequelize.STRING(100),
 				allowNull: false,
 			},
-			"emailDomain": {
+			emailDomain: {
 				type: Sequelize.STRING(100),
 				allowNull: false,
 				unique: true,
 			},
-			"createdAt": {
+			createdAt: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			"updatedAt": {
+			updatedAt: {
 				type: Sequelize.DATE,
 				allowNull: false,
 				defaultValue: Sequelize.NOW,
 			},
-			"deletedAt": {
+			deletedAt: {
 				type: Sequelize.DATE,
 				allowNull: true,
 			},
-			"modifiedByUserId": {
+			modifiedByUserId: {
 				type: Sequelize.UUID,
 				allowNull: true,
 			},

@@ -13,7 +13,7 @@ export default (sequelize: Sequelize) => {
 		declare createdAt: CreationOptional<Date>;
 		declare updatedAt: CreationOptional<Date>;
 		declare deletedAt: CreationOptional<Date | null>;
-		declare modifiedByUserId: ForeignKey<string> | null;
+		declare modifiedByUserId: ForeignKey<string>;
 
 		static associate(models: Models) {
 			Partner.belongsTo(models.Company, {
@@ -39,48 +39,59 @@ export default (sequelize: Sequelize) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 				primaryKey: true,
+				field: 'id',
 			},
 			companyId: {
 				type: DataTypes.UUID,
 				allowNull: false,
+				field: 'companyId',
 			},
 			name: {
 				type: DataTypes.STRING(100),
 				allowNull: false,
+				field: 'name',
 			},
 			type: {
 				type: DataTypes.ENUM('customer', 'supplier'),
 				allowNull: false,
+				field: 'type',
 			},
 			email: {
 				type: DataTypes.STRING(150),
 				allowNull: true,
+				field: 'email',
 			},
 			phone: {
 				type: DataTypes.STRING(20),
 				allowNull: true,
+				field: 'phone',
 			},
 			address: {
 				type: DataTypes.TEXT,
 				allowNull: true,
+				field: 'address',
 			},
 			modifiedByUserId: {
 				type: DataTypes.UUID,
 				allowNull: false,
+				field: 'modifiedByUserId',
 			},
 			createdAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'createdAt',
 			},
 			updatedAt: {
 				type: DataTypes.DATE,
 				allowNull: false,
 				defaultValue: DataTypes.NOW,
+				field: 'updatedAt',
 			},
 			deletedAt: {
 				type: DataTypes.DATE,
 				allowNull: true,
+				field: 'deletedAt',
 			},
 		},
 		{

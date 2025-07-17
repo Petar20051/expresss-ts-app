@@ -8,7 +8,7 @@ module.exports = {
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
       },
-      "orderId": {
+      orderId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -18,7 +18,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      "productId": {
+      productId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -32,24 +32,24 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      "unitPrice": {
+      unitPrice: {
         type: Sequelize.DECIMAL(12, 2),
         allowNull: false,
       },
-      "createdAt": {
+      createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "updatedAt": {
+      updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
         allowNull: false,
       },
-      "deletedAt": {
+      deletedAt: {
         type: Sequelize.DATE,
       },
-      "modifiedByUserId": {
+      modifiedByUserId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
