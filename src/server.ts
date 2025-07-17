@@ -1,39 +1,18 @@
-import express from 'express';
-import dotenv from 'dotenv';
 import sequelize from './db/sequelize.js';
-import {errorHandler} from './middlewares/error.middleware.js';
-import {loadRoutes} from './routes/loadRoutes.js';
-import {notFoundHandler} from './middlewares/not-found.js';
-
-dotenv.config();
+import app from './app.js';
 
 const PORT = process.env.PORT || 3000;
-
-const app = express();
-app.use(express.json());
-
-loadRoutes(app);
-
-app.use(notFoundHandler);
-app.use(errorHandler);
-
 let server: ReturnType<typeof app.listen>;
+let isShuttingDown = false;
 
 export const start = async () => {
-	try {
-		await sequelize.authenticate();
-		console.log('✅ Database connected');
+	await sequelize.authenticate();
+	console.log('✅ Database connected');
 
-		server = app.listen(PORT, () => {
-			console.log(`🚀 Server running at http://localhost:${PORT}`);
-		});
-	} catch (err) {
-		console.error('❌ Failed to connect to DB:', err);
-		process.exit(1);
-	}
+	server = app.listen(PORT, () => {
+		console.log(`🚀 Server running at http://localhost:${PORT}`);
+	});
 };
-
-let isShuttingDown = false;
 
 export const shutdown = async () => {
 	if (isShuttingDown) return;
@@ -42,9 +21,7 @@ export const shutdown = async () => {
 	console.log('\n🛑 Shutting down...');
 
 	if (server) {
-		server.close(() => {
-			console.log('🧯 HTTP server closed');
-		});
+		server.close(() => console.log('🧯 HTTP server closed'));
 	}
 
 	try {

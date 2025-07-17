@@ -11,8 +11,8 @@ import warehouseRoutes from '../entities/warehouse/warehouse.routes.js';
 export function loadRoutes(app: Express) {
 	app.use('/api/companies', companyRoutes);
 	app.use('/api/invoices', invoiceRoutes);
-	app.use('/api/orders', orderRoutes);
 	app.use('/api/order-items', orderItemRoutes);
+	app.use('/api/orders', orderRoutes);
 	app.use('/api/partners', partnerRoutes);
 	app.use('/api/products', productRoutes);
 	app.use('/api/users', userRoutes);

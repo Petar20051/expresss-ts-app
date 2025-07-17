@@ -1,4 +1,4 @@
-import {ZodType, ZodError} from 'zod';
+import {ZodType} from 'zod';
 import {Request, Response, NextFunction} from 'express';
 
 interface ValidationSchemas {
@@ -17,10 +17,7 @@ export const validate = (schemas: ValidationSchemas) => {
 			}
 			next();
 		} catch (error) {
-			if (error instanceof ZodError) {
-				return next(error);
-			}
-			next(error);
+			return next(error);
 		}
 	};
 };

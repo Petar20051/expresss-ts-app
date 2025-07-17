@@ -19,13 +19,13 @@ const Invoice = invoiceModel(sequelize);
 
 const models = {
 	Company,
-	User,
-	Warehouse,
-	Product,
-	Partner,
+	Invoice,
 	Order,
 	OrderItem,
-	Invoice,
+	Partner,
+	Product,
+	User,
+	Warehouse,
 };
 
 Object.values(models).forEach((model) => {

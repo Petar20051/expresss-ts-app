@@ -1,5 +1,5 @@
 import express, {Request, Response, NextFunction} from 'express';
-import PartnerService from './partner.service.js';
+import partnerService from './partner.service.js';
 import {validate} from '../../middlewares/validate.js';
 import {createPartnerSchema, updatePartnerSchema, partnerIdParamSchema} from './partner.schemas.js';
 
@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/best-customer', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
-		const bestCustomer = await PartnerService.getBestCustomerPerCompany();
+		const bestCustomer = await partnerService.getBestCustomerPerCompany();
 		res.json(bestCustomer);
 	} catch (error) {
 		next(error);
@@ -16,7 +16,7 @@ router.get('/best-customer', async (_req: Request, res: Response, next: NextFunc
 
 router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
-		const partners = await PartnerService.getAllPartners();
+		const partners = await partnerService.getAllPartners();
 		res.json(partners);
 	} catch (error) {
 		next(error);
@@ -25,7 +25,7 @@ router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 
 router.get('/:id', validate({params: partnerIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const partner = await PartnerService.getPartnerById(req.params.id);
+		const partner = await partnerService.getPartnerById(req.params.id);
 		res.json(partner);
 	} catch (error) {
 		next(error);
@@ -34,7 +34,7 @@ router.get('/:id', validate({params: partnerIdParamSchema}), async (req: Request
 
 router.post('/', validate({body: createPartnerSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const partner = await PartnerService.createPartner(req.body);
+		const partner = await partnerService.createPartner(req.body);
 		res.status(201).json(partner);
 	} catch (error) {
 		next(error);
@@ -46,7 +46,7 @@ router.put(
 	validate({params: partnerIdParamSchema, body: updatePartnerSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await PartnerService.updatePartner(req.params.id, req.body);
+			const updated = await partnerService.updatePartner(req.params.id, req.body);
 			res.json(updated);
 		} catch (error) {
 			next(error);
@@ -56,7 +56,7 @@ router.put(
 
 router.delete('/:id', validate({params: partnerIdParamSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		await PartnerService.deletePartner(req.params.id);
+		await partnerService.deletePartner(req.params.id);
 		res.status(204).send();
 	} catch (error) {
 		next(error);
