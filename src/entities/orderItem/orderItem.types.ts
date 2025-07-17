@@ -1,9 +1,5 @@
-export type CreateOrderItemDto = {
-	orderId: string;
-	productId: string;
-	quantity: number;
-	unitPrice: number;
-	modifiedByUserId?: string;
-};
+import {z} from 'zod';
+import {createOrderItemSchema, updateOrderItemSchema} from './orderItem.schemas.js';
 
-export type UpdateOrderItemDto = Partial<CreateOrderItemDto>;
+export type CreateOrderItemDto = z.infer<typeof createOrderItemSchema>;
+export type UpdateOrderItemDto = z.infer<typeof updateOrderItemSchema>;

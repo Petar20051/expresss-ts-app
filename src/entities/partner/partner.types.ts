@@ -1,11 +1,5 @@
-export type CreatePartnerDto = {
-	companyId: string;
-	name: string;
-	type: 'customer' | 'supplier';
-	email?: string;
-	phone?: string;
-	address?: string;
-	modifiedByUserId?: string;
-};
+import {z} from 'zod';
+import {createPartnerSchema, updatePartnerSchema} from './partner.schemas.js';
 
-export type UpdatePartnerDto = Partial<CreatePartnerDto>;
+export type CreatePartnerDto = z.infer<typeof createPartnerSchema>;
+export type UpdatePartnerDto = z.infer<typeof updatePartnerSchema>;

@@ -8,7 +8,7 @@ export const createInvoiceSchema = z.object({
 	invoiceNumber: z.string().min(1).max(50),
 	orderId: z.uuid(),
 	status: z.enum(['unpaid', 'paid', 'overdue']),
-	modifiedByUserId: z.uuid().nullable().optional(),
+	modifiedByUserId: z.uuid(),
 });
 
 export const updateInvoiceSchema = createInvoiceSchema.partial();

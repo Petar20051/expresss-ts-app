@@ -50,6 +50,7 @@ module.exports = {
       },
       "modifiedByUserId": {
         type: Sequelize.UUID,
+        allowNull: false,
         references: {
           model: 'User',
           key: 'id',

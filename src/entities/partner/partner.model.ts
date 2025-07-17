@@ -66,7 +66,7 @@ export default (sequelize: Sequelize) => {
 			},
 			modifiedByUserId: {
 				type: DataTypes.UUID,
-				allowNull: true,
+				allowNull: false,
 			},
 			createdAt: {
 				type: DataTypes.DATE,

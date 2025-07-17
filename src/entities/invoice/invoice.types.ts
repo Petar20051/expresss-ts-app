@@ -1,14 +1,5 @@
-export type CreateInvoiceDto = {
-	invoiceNumber: string;
-	orderId: string;
-	status: 'unpaid' | 'paid' | 'overdue';
-	date?: Date;
-	modifiedByUserId?: string;
-};
+import {z} from 'zod';
+import {createInvoiceSchema, updateInvoiceSchema} from './invoice.schemas.js';
 
-export type UpdateInvoiceDto = {
-	invoiceNumber?: string;
-	status?: 'unpaid' | 'paid' | 'overdue';
-	date?: Date;
-	modifiedByUserId?: string;
-};
+export type CreateInvoiceDto = z.infer<typeof createInvoiceSchema>;
+export type UpdateInvoiceDto = z.infer<typeof updateInvoiceSchema>;

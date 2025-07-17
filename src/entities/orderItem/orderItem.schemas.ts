@@ -9,7 +9,7 @@ export const createOrderItemSchema = z.object({
 	productId: z.uuid(),
 	quantity: z.number().int().min(1),
 	unitPrice: z.number().min(0),
-	modifiedByUserId: z.uuid().nullable().optional(),
+	modifiedByUserId: z.uuid(),
 });
 
 export const updateOrderItemSchema = createOrderItemSchema.partial();

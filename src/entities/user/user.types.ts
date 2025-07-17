@@ -1,12 +1,5 @@
-export type CreateUserDto = {
-	companyId: string;
-	fullName: string;
-	email: string;
-	modifiedByUserId?: string;
-};
+import {z} from 'zod';
+import {createUserSchema, updateUserSchema} from './user.schemas.js';
 
-export type UpdateUserDto = {
-	fullName?: string;
-	email?: string;
-	modifiedByUserId?: string;
-};
+export type CreateUserDto = z.infer<typeof createUserSchema>;
+export type UpdateUserDto = z.infer<typeof updateUserSchema>;

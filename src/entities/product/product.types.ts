@@ -1,11 +1,5 @@
-export type CreateProductDto = {
-	companyId: string;
-	name: string;
-	sku: string;
-	productType: 'solid' | 'liquid';
-	description?: string;
-	basePrice: number;
-	modifiedByUserId?: string;
-};
+import {z} from 'zod';
+import {createProductSchema, updateProductSchema} from './product.schemas.js';
 
-export type UpdateProductDto = Partial<CreateProductDto>;
+export type CreateProductDto = z.infer<typeof createProductSchema>;
+export type UpdateProductDto = z.infer<typeof updateProductSchema>;

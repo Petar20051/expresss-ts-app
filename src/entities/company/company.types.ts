@@ -1,7 +1,5 @@
-export type CreateCompanyDto = {
-	name: string;
-	emailDomain: string;
-	modifiedByUserId?: string | null;
-};
+import {z} from 'zod';
+import {createCompanySchema, updateCompanySchema} from './company.schemas.js';
 
-export type UpdateCompanyDto = Partial<CreateCompanyDto>;
+export type CreateCompanyDto = z.infer<typeof createCompanySchema>;
+export type UpdateCompanyDto = z.infer<typeof updateCompanySchema>;

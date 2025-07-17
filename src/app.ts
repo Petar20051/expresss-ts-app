@@ -6,6 +6,7 @@ import {notFoundHandler} from './middlewares/not-found.js';
 const app = express();
 
 app.use(express.json());
+
 loadRoutes(app);
 app.use(notFoundHandler);
 app.use(errorHandler);

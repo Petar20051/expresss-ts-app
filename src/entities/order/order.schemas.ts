@@ -10,7 +10,7 @@ export const createOrderSchema = z.object({
 	partnerId: z.uuid().nullable().optional(),
 	warehouseId: z.uuid(),
 	notes: z.string().optional(),
-	modifiedByUserId: z.uuid(),
+	modifiedByUserId: z.string().uuid(),
 });
 
 export const updateOrderSchema = createOrderSchema.partial();

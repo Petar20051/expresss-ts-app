@@ -1,18 +1,5 @@
-export type CreateOrderDto = {
-	companyId: string;
-	orderType: 'shipment' | 'delivery';
-	partnerId?: string;
-	warehouseId: string;
-	notes?: string;
-	date?: Date;
-	modifiedByUserId: string;
-};
+import {z} from 'zod';
+import {createOrderSchema, updateOrderSchema} from './order.schemas.js';
 
-export type UpdateOrderDto = {
-	orderType?: 'shipment' | 'delivery';
-	partnerId?: string;
-	warehouseId?: string;
-	notes?: string;
-	date?: Date;
-	modifiedByUserId?: string;
-};
+export type CreateOrderDto = z.infer<typeof createOrderSchema>;
+export type UpdateOrderDto = z.infer<typeof updateOrderSchema>;
