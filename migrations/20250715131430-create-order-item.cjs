@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('OrderItem', {
+    await queryInterface.createTable('orderItem', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -29,7 +29,7 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       quantity: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
         allowNull: false,
       },
       unitPrice: {
@@ -61,7 +61,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.addConstraint('OrderItem', {
+    await queryInterface.addConstraint('orderItem', {
       fields: ['orderId', 'productId'],
       type: 'unique',
       name: 'unique_order_product',
@@ -69,6 +69,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('OrderItem');
+    await queryInterface.dropTable('orderItem');
   },
 };

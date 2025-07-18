@@ -4,7 +4,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const existing = await queryInterface.sequelize.query(
-      'SELECT COUNT(*) as count FROM "OrderItem";',
+      'SELECT COUNT(*) as count FROM "orderItem";',
       { type: Sequelize.QueryTypes.SELECT }
     );
 
@@ -13,7 +13,7 @@ module.exports = {
       return;
     }
 
-    await queryInterface.bulkInsert('OrderItem', [
+    await queryInterface.bulkInsert('orderItem', [
       {
         id: '8e2d43b9-2bdf-4c2d-9ea6-1d5f96f30b11',
         orderId: 'a1f7c4ae-2e1c-41fd-820a-49c0f0707aa1',
@@ -38,6 +38,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete('OrderItem', null, {});
+    await queryInterface.bulkDelete('orderItem', null, {});
   },
 };

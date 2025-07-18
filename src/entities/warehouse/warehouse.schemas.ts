@@ -9,7 +9,6 @@ export const createWarehouseSchema = z.object({
 	name: z.string().min(1).max(100),
 	location: z.string().min(1),
 	supportedType: z.enum(['solid', 'liquid']),
-	modifiedByUserId: z.uuid(),
 });
 
 export const updateWarehouseSchema = createWarehouseSchema.partial();

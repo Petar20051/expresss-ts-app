@@ -50,6 +50,7 @@ export default (sequelize: Sequelize) => {
 				type: DataTypes.STRING(100),
 				allowNull: false,
 				field: 'name',
+				unique: true,
 			},
 			sku: {
 				type: DataTypes.STRING(50),

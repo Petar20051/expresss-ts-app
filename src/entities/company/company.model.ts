@@ -5,7 +5,7 @@ export default (sequelize: Sequelize) => {
 	class Company extends Model<InferAttributes<Company>, InferCreationAttributes<Company>> {
 		declare id: CreationOptional<string>;
 		declare name: string;
-		declare emailDomain: string;
+		declare email: string;
 		declare createdAt: CreationOptional<Date>;
 		declare updatedAt: CreationOptional<Date>;
 		declare deletedAt: CreationOptional<Date | null>;
@@ -55,9 +55,10 @@ export default (sequelize: Sequelize) => {
 			name: {
 				type: DataTypes.STRING(100),
 				allowNull: false,
+				unique: true,
 				field: 'name',
 			},
-			emailDomain: {
+			email: {
 				type: DataTypes.STRING(100),
 				allowNull: false,
 				unique: true,

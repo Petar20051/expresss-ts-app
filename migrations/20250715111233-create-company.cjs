@@ -2,7 +2,7 @@
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		await queryInterface.createTable('Company', {
+		await queryInterface.createTable('company', {
 			id: {
 				type: Sequelize.UUID,
 				defaultValue: Sequelize.UUIDV4,
@@ -11,8 +11,9 @@ module.exports = {
 			name: {
 				type: Sequelize.STRING(100),
 				allowNull: false,
+				unique: true
 			},
-			emailDomain: {
+			email: {
 				type: Sequelize.STRING(100),
 				allowNull: false,
 				unique: true,
@@ -39,6 +40,6 @@ module.exports = {
 	},
 
 	down: async (queryInterface) => {
-		await queryInterface.dropTable('Company');
+		await queryInterface.dropTable('company');
 	},
 };

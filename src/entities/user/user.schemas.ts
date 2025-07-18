@@ -8,7 +8,6 @@ export const createUserSchema = z.object({
 	companyId: z.uuid(),
 	fullName: z.string().min(1).max(100),
 	email: z.email().max(150),
-	modifiedByUserId: z.uuid().optional(),
 });
 
 export const updateUserSchema = createUserSchema.partial();

@@ -4,7 +4,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const existing = await queryInterface.sequelize.query(
-      'SELECT COUNT(*) as count FROM "Partner";',
+      'SELECT COUNT(*) as count FROM "partner";',
       { type: Sequelize.QueryTypes.SELECT }
     );
 
@@ -13,7 +13,7 @@ module.exports = {
       return;
     }
 
-    await queryInterface.bulkInsert('Partner', [
+    await queryInterface.bulkInsert('partner', [
       {
         id: 'd1f7c9ae-2e1c-41fd-820a-49c0f0707ba1',
         companyId: 'e5adcec8-9fd6-4391-8d24-b7631a34eae3',
@@ -42,6 +42,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete('Partner', null, {});
+    await queryInterface.bulkDelete('partner', null, {});
   },
 };

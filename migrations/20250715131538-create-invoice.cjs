@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.createTable('Invoice', {
+    await queryInterface.createTable('invoice', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -60,8 +60,8 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Invoice');
-    await queryInterface.sequelize.query(`DROP SEQUENCE IF EXISTS Invoice_invoiceNumber_seq;`);
-    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_Invoice_status";');
+    await queryInterface.dropTable('invoice');
+    await queryInterface.sequelize.query(`DROP SEQUENCE IF EXISTS invoice_invoiceNumber_seq;`);
+    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_invoice_status";');
   },
 };

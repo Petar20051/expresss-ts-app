@@ -13,7 +13,7 @@ module.exports = {
       return;
     }
 
-    await queryInterface.bulkInsert('Warehouse', [
+    await queryInterface.bulkInsert('warehouse', [
       {
         id: 'b2eb9246-f6f6-42a2-8e24-145225fbba91',
         companyId: 'e5adcec8-9fd6-4391-8d24-b7631a34eae3',
@@ -48,6 +48,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete('Warehouse', null, {});
+    await queryInterface.bulkDelete('warehouse', null, {});
   },
 };

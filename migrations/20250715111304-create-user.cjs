@@ -2,7 +2,7 @@
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		await queryInterface.createTable('User', {
+		await queryInterface.createTable('user', {
 			id: {
 				type: Sequelize.UUID,
 				defaultValue: Sequelize.UUIDV4,
@@ -16,7 +16,7 @@ module.exports = {
 					key: 'id',
 				},
 				onUpdate: 'CASCADE',
-				onDelete: 'CASCADE',
+				onDelete: 'RESTRICT',
 			},
 			fullName: {
 				type: Sequelize.STRING(100),
@@ -55,6 +55,6 @@ module.exports = {
 	},
 
 	down: async (queryInterface) => {
-		await queryInterface.dropTable('User');
+		await queryInterface.dropTable('user');
 	},
 };

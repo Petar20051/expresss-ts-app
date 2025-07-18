@@ -4,7 +4,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     const existing = await queryInterface.sequelize.query(
-      'SELECT COUNT(*) as count FROM "Invoice";',
+      'SELECT COUNT(*) as count FROM "invoice";',
       { type: Sequelize.QueryTypes.SELECT }
     );
 
@@ -13,7 +13,7 @@ module.exports = {
       return;
     }
 
-    await queryInterface.bulkInsert('Invoice', [
+    await queryInterface.bulkInsert('invoice', [
       {
         id: '9c0a327f-df56-4c89-b6fa-73a31df7a91f',
         invoiceNumber: 1,
@@ -38,6 +38,6 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete('Invoice', null, {});
+    await queryInterface.bulkDelete('invoice', null, {});
   },
 };

@@ -39,7 +39,7 @@ export default (sequelize: Sequelize) => {
 				field: 'productId',
 			},
 			quantity: {
-				type: DataTypes.INTEGER,
+				type: DataTypes.DECIMAL,
 				allowNull: false,
 				validate: {
 					min: 1,

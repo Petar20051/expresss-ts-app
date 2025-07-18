@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Warehouse', {
+    await queryInterface.createTable('warehouse', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: 'Company',
+          model: 'company',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -21,6 +21,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING(100),
         allowNull: false,
+        unique: true
       },
       location: {
         type: Sequelize.TEXT,
@@ -57,7 +58,7 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('Warehouse');
-    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_Warehouse_supportedType";');
+    await queryInterface.dropTable('warehouse');
+    await queryInterface.sequelize.query('DROP TYPE IF EXISTS "enum_warehouse_supportedType";');
   },
 };

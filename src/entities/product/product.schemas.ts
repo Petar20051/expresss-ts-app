@@ -10,8 +10,7 @@ export const createProductSchema = z.object({
 	sku: z.string().min(1).max(50),
 	productType: z.enum(['solid', 'liquid']),
 	description: z.string().nullable().optional(),
-	basePrice: z.number().nonnegative(),
-	modifiedByUserId: z.uuid(),
+	basePrice: z.number().positive(),
 });
 
 export const updateProductSchema = createProductSchema.partial();
