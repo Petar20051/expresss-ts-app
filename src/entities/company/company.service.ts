@@ -1,5 +1,5 @@
-import models from '../../db/models.js';
-import {AppError} from '../../errors/app-error.js';
+import models from '../../db/modelsInit.js';
+import {AppError} from '../../errors/appError.js';
 import {CreateCompanyDto, UpdateCompanyDto} from './company.types.js';
 
 class CompanyService {

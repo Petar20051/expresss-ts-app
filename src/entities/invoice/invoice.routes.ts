@@ -1,6 +1,6 @@
 import express, {Request, Response, NextFunction} from 'express';
 import invoiceService from './invoice.service.js';
-import {validate} from '../../middlewares/validate.js';
+import {validate} from '../../middlewares/validateRequest.js';
 import {createInvoiceSchema, updateInvoiceSchema, invoiceIdParamSchema} from './invoice.schemas.js';
 
 const router = express.Router();

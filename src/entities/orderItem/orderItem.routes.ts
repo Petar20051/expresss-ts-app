@@ -1,6 +1,6 @@
 import express, {Request, Response, NextFunction} from 'express';
 import orderItemService from './orderItem.service.js';
-import {validate} from '../../middlewares/validate.js';
+import {validate} from '../../middlewares/validateRequest.js';
 import {createOrderItemSchema, updateOrderItemSchema, orderItemIdParamSchema} from './orderItem.schemas.js';
 
 const router = express.Router();
