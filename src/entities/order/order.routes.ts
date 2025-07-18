@@ -25,7 +25,8 @@ router.get('/:id', validate({params: orderIdParamSchema}), async (req: Request, 
 
 router.post('/', validate({body: createOrderSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const order = await orderService.createOrder(req.body);
+		const userId = req.header('x-user-id') || '';
+		const order = await orderService.createOrder(req.body, userId);
 		res.status(201).json(order);
 	} catch (error) {
 		next(error);
@@ -37,7 +38,8 @@ router.put(
 	validate({params: orderIdParamSchema, body: updateOrderSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await orderService.updateOrder(req.params.id, req.body);
+			const userId = req.header('x-user-id') || '';
+			const updated = await orderService.updateOrder(req.params.id, req.body, userId);
 			res.json(updated);
 		} catch (error) {
 			next(error);

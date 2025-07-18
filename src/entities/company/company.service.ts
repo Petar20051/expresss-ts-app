@@ -15,13 +15,19 @@ class CompanyService {
 		return company;
 	}
 
-	async createCompany(data: CreateCompanyDto) {
-		return await this.companyModel.create(data);
+	async createCompany(data: CreateCompanyDto, modifiedByUserId: string) {
+		return await this.companyModel.create({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
-	async updateCompany(id: string, data: UpdateCompanyDto) {
+	async updateCompany(id: string, data: UpdateCompanyDto, modifiedByUserId: string) {
 		const company = await this.getCompanyById(id);
-		return await company.update(data);
+		return await company.update({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
 	async deleteCompany(id: string) {

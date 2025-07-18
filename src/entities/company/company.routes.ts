@@ -25,7 +25,8 @@ router.get('/:id', validate({params: companyIdParamSchema}), async (req, res, ne
 
 router.post('/', validate({body: createCompanySchema}), async (req, res, next) => {
 	try {
-		const company = await companyService.createCompany(req.body);
+		const userId = req.header('x-user-id') || '';
+		const company = await companyService.createCompany(req.body, userId);
 		res.status(201).json(company);
 	} catch (error) {
 		next(error);
@@ -34,7 +35,8 @@ router.post('/', validate({body: createCompanySchema}), async (req, res, next) =
 
 router.put('/:id', validate({params: companyIdParamSchema, body: updateCompanySchema}), async (req, res, next) => {
 	try {
-		const updated = await companyService.updateCompany(req.params.id, req.body);
+		const userId = req.header('x-user-id') || '';
+		const updated = await companyService.updateCompany(req.params.id, req.body, userId);
 		res.json(updated);
 	} catch (error) {
 		next(error);

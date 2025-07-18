@@ -25,7 +25,8 @@ router.get('/:id', validate({params: invoiceIdParamSchema}), async (req: Request
 
 router.post('/', validate({body: createInvoiceSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const invoice = await invoiceService.createInvoice(req.body);
+		const userId = req.header('x-user-id') || '';
+		const invoice = await invoiceService.createInvoice(req.body, userId);
 		res.status(201).json(invoice);
 	} catch (error) {
 		next(error);
@@ -37,7 +38,8 @@ router.put(
 	validate({params: invoiceIdParamSchema, body: updateInvoiceSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await invoiceService.updateInvoice(req.params.id, req.body);
+			const userId = req.header('x-user-id') || '';
+			const updated = await invoiceService.updateInvoice(req.params.id, req.body, userId);
 			res.json(updated);
 		} catch (error) {
 			next(error);

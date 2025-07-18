@@ -17,13 +17,19 @@ class PartnerService {
 		return partner;
 	}
 
-	async createPartner(data: CreatePartnerDto) {
-		return await this.partnerModel.create(data);
+	async createPartner(data: CreatePartnerDto, modifiedByUserId: string) {
+		return await this.partnerModel.create({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
-	async updatePartner(id: string, data: UpdatePartnerDto) {
+	async updatePartner(id: string, data: UpdatePartnerDto, modifiedByUserId: string) {
 		const partner = await this.getPartnerById(id);
-		return await partner.update(data);
+		return await partner.update({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
 	async deletePartner(id: string) {

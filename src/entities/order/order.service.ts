@@ -15,13 +15,19 @@ class OrderService {
 		return order;
 	}
 
-	async createOrder(data: CreateOrderDto) {
-		return await this.orderModel.create(data);
+	async createOrder(data: CreateOrderDto, modifiedByUserId: string) {
+		return await this.orderModel.create({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
-	async updateOrder(id: string, data: UpdateOrderDto) {
+	async updateOrder(id: string, data: UpdateOrderDto, modifiedByUserId: string) {
 		const order = await this.getOrderById(id);
-		return await order.update(data);
+		return await order.update({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
 	async deleteOrder(id: string) {

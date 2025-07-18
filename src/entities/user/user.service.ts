@@ -15,13 +15,19 @@ class UserService {
 		return user;
 	}
 
-	async createUser(data: CreateUserDto) {
-		return await this.userModel.create(data);
+	async createUser(data: CreateUserDto, modifiedByUserId: string) {
+		return await this.userModel.create({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
-	async updateUser(id: string, data: UpdateUserDto) {
+	async updateUser(id: string, data: UpdateUserDto, modifiedByUserId: string) {
 		const user = await this.getUserById(id);
-		return await user.update(data);
+		return await user.update({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
 	async deleteUser(id: string) {

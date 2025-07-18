@@ -15,13 +15,19 @@ class InvoiceService {
 		return invoice;
 	}
 
-	async createInvoice(data: CreateInvoiceDto) {
-		return await this.invoiceModel.create(data);
+	async createInvoice(data: CreateInvoiceDto, modifiedByUserId: string) {
+		return await this.invoiceModel.create({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
-	async updateInvoice(id: string, data: UpdateInvoiceDto) {
+	async updateInvoice(id: string, data: UpdateInvoiceDto, modifiedByUserId: string) {
 		const invoice = await this.getInvoiceById(id);
-		return await invoice.update(data);
+		return await invoice.update({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
 	async deleteInvoice(id: string) {

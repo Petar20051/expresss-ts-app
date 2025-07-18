@@ -5,6 +5,15 @@ import {createWarehouseSchema, updateWarehouseSchema, warehouseIdParamSchema} fr
 
 const router = express.Router();
 
+router.get('/highest-stock', async (_req: Request, res: Response, next: NextFunction) => {
+	try {
+		const highestStock = await warehouseService.getHighestStockPerWarehouse();
+		res.json(highestStock);
+	} catch (error) {
+		next(error);
+	}
+});
+
 router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
 		const warehouses = await warehouseService.getAllWarehouses();
@@ -25,7 +34,8 @@ router.get('/:id', validate({params: warehouseIdParamSchema}), async (req: Reque
 
 router.post('/', validate({body: createWarehouseSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const warehouse = await warehouseService.createWarehouse(req.body);
+		const userId = req.header('x-user-id') || '';
+		const warehouse = await warehouseService.createWarehouse(req.body, userId);
 		res.status(201).json(warehouse);
 	} catch (error) {
 		next(error);
@@ -37,7 +47,8 @@ router.put(
 	validate({params: warehouseIdParamSchema, body: updateWarehouseSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await warehouseService.updateWarehouse(req.params.id, req.body);
+			const userId = req.header('x-user-id') || '';
+			const updated = await warehouseService.updateWarehouse(req.params.id, req.body, userId);
 			res.json(updated);
 		} catch (error) {
 			next(error);

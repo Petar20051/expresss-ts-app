@@ -14,15 +14,6 @@ router.get('/best-sellers', async (_req: Request, res: Response, next: NextFunct
 	}
 });
 
-router.get('/highest-stock', async (_req: Request, res: Response, next: NextFunction) => {
-	try {
-		const highestStock = await productService.getHighestStockPerWarehouse();
-		res.json(highestStock);
-	} catch (error) {
-		next(error);
-	}
-});
-
 router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
 	try {
 		const products = await productService.getAllProducts();
@@ -43,7 +34,8 @@ router.get('/:id', validate({params: productIdParamSchema}), async (req: Request
 
 router.post('/', validate({body: createProductSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const product = await productService.createProduct(req.body);
+		const userId = req.header('x-user-id') || '';
+		const product = await productService.createProduct(req.body, userId);
 		res.status(201).json(product);
 	} catch (error) {
 		next(error);
@@ -55,7 +47,8 @@ router.put(
 	validate({params: productIdParamSchema, body: updateProductSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await productService.updateProduct(req.params.id, req.body);
+			const userId = req.header('x-user-id') || '';
+			const updated = await productService.updateProduct(req.params.id, req.body, userId);
 			res.json(updated);
 		} catch (error) {
 			next(error);

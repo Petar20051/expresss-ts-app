@@ -34,7 +34,8 @@ router.get('/:id', validate({params: partnerIdParamSchema}), async (req: Request
 
 router.post('/', validate({body: createPartnerSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const partner = await partnerService.createPartner(req.body);
+		const userId = req.header('x-user-id') || '';
+		const partner = await partnerService.createPartner(req.body, userId);
 		res.status(201).json(partner);
 	} catch (error) {
 		next(error);
@@ -46,7 +47,8 @@ router.put(
 	validate({params: partnerIdParamSchema, body: updatePartnerSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await partnerService.updatePartner(req.params.id, req.body);
+			const userId = req.header('x-user-id') || '';
+			const updated = await partnerService.updatePartner(req.params.id, req.body, userId);
 			res.json(updated);
 		} catch (error) {
 			next(error);

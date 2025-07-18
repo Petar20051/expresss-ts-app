@@ -17,13 +17,19 @@ class ProductService {
 		return product;
 	}
 
-	async createProduct(data: CreateProductDto) {
-		return await this.productModel.create(data);
+	async createProduct(data: CreateProductDto, modifiedByUserId: string) {
+		return await this.productModel.create({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
-	async updateProduct(id: string, data: UpdateProductDto) {
+	async updateProduct(id: string, data: UpdateProductDto, modifiedByUserId: string) {
 		const product = await this.getProductById(id);
-		return await product.update(data);
+		return await product.update({
+			...data,
+			modifiedByUserId,
+		});
 	}
 
 	async deleteProduct(id: string) {
@@ -46,46 +52,6 @@ class ProductService {
 			  AND o."partnerId" IS NOT NULL
 			GROUP BY p."id", p."name", o."companyId"
 			ORDER BY "totalSold" DESC
-			`,
-			{type: QueryTypes.SELECT}
-		);
-	}
-
-	async getHighestStockPerWarehouse() {
-		return await this.sequelize.query(
-			`
-			WITH stock_per_product AS (
-				SELECT
-					w."id" AS "warehouseId",
-					w."name" AS "WarehouseName",
-					p."name" AS "ProductName",
-					p."id" AS "productId",
-					SUM(
-						CASE
-							WHEN o."orderType" = 'delivery' THEN oi."quantity"
-							WHEN o."orderType" = 'shipment' THEN -oi."quantity"
-							ELSE 0
-						END
-					) AS "stock"
-				FROM "Order" o
-				JOIN "OrderItem" oi ON o."id" = oi."orderId"
-				JOIN "Product" p ON p."id" = oi."productId"
-				JOIN "Warehouse" w ON o."warehouseId" = w."id"
-				WHERE o."deletedAt" IS NULL
-				  AND oi."deletedAt" IS NULL
-				  AND p."deletedAt" IS NULL
-				GROUP BY w."id", p."id", p."name", w."name"
-			),
-			max_stock AS (
-				SELECT "WarehouseName", MAX("stock") AS max_stock
-				FROM stock_per_product
-				GROUP BY "WarehouseName"
-			)
-			SELECT s."WarehouseName", s."ProductName", s."stock"
-			FROM stock_per_product s
-			JOIN max_stock m
-			  ON s."WarehouseName" = m."WarehouseName"
-			 AND s."stock" = m.max_stock;
 			`,
 			{type: QueryTypes.SELECT}
 		);

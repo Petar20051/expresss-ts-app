@@ -25,7 +25,8 @@ router.get('/:id', validate({params: userIdParamSchema}), async (req: Request, r
 
 router.post('/', validate({body: createUserSchema}), async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const user = await userService.createUser(req.body);
+		const userId = req.header('x-user-id') || '';
+		const user = await userService.createUser(req.body, userId);
 		res.status(201).json(user);
 	} catch (error) {
 		next(error);
@@ -37,7 +38,8 @@ router.put(
 	validate({params: userIdParamSchema, body: updateUserSchema}),
 	async (req: Request, res: Response, next: NextFunction) => {
 		try {
-			const updated = await userService.updateUser(req.params.id, req.body);
+			const userId = req.header('x-user-id') || '';
+			const updated = await userService.updateUser(req.params.id, req.body, userId);
 			res.json(updated);
 		} catch (error) {
 			next(error);

@@ -22,19 +22,19 @@ class OrderItemService {
 		return item;
 	}
 
-	async createOrderItem(data: CreateOrderItemDto) {
+	async createOrderItem(data: CreateOrderItemDto, modifiedByUserId: string) {
 		return await sequelize.transaction(async (transaction: Transaction) => {
 			await validateWarehouseSupportsProductType(data, transaction, models);
 			await validateOrderProductCompanyMatch(data, transaction, models);
 			await validateShipmentStockAvailability(data, transaction, models);
 
-			return await this.orderItemModel.create(data, {transaction});
+			return await this.orderItemModel.create({...data, modifiedByUserId}, {transaction});
 		});
 	}
 
-	async updateOrderItem(id: string, data: UpdateOrderItemDto) {
+	async updateOrderItem(id: string, data: UpdateOrderItemDto, modifiedByUserId: string) {
 		const item = await this.getOrderItemById(id);
-		return await item.update(data);
+		return await item.update({...data, modifiedByUserId});
 	}
 
 	async deleteOrderItem(id: string) {
