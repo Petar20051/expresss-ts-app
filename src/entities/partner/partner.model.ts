@@ -1,5 +1,5 @@
 import {Model, DataTypes, Sequelize, CreationOptional, InferAttributes, InferCreationAttributes, ForeignKey} from 'sequelize';
-import {Models} from '../../db/modelsInit.js';
+import {Models} from '../../db/models.init.js';
 
 export default (sequelize: Sequelize) => {
 	class Partner extends Model<InferAttributes<Partner>, InferCreationAttributes<Partner>> {

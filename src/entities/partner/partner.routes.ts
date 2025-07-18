@@ -1,6 +1,6 @@
 import express, {Request, Response, NextFunction} from 'express';
 import partnerService from './partner.service.js';
-import {validate} from '../../middlewares/validateRequest.js';
+import {validate} from '../../middlewares/validate.request.js';
 import {createPartnerSchema, updatePartnerSchema, partnerIdParamSchema} from './partner.schemas.js';
 
 const router = express.Router();

@@ -1,6 +1,6 @@
 import {ErrorRequestHandler} from 'express';
 import {ZodError} from 'zod';
-import {AppError} from '../errors/appError.js';
+import {AppError} from '../errors/app.error.js';
 import {ForeignKeyConstraintError, UniqueConstraintError} from 'sequelize';
 
 export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {

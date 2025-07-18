@@ -1,6 +1,6 @@
 import {Model, DataTypes, Sequelize, CreationOptional, InferAttributes, InferCreationAttributes, ForeignKey} from 'sequelize';
-import {Models} from '../../db/modelsInit.js';
-import {AppError} from '../../errors/appError.js';
+import {Models} from '../../db/models.init.js';
+import {AppError} from '../../errors/app.error.js';
 
 export default (sequelize: Sequelize) => {
 	class OrderItem extends Model<InferAttributes<OrderItem>, InferCreationAttributes<OrderItem>> {

@@ -1,6 +1,6 @@
 import express, {Request, Response, NextFunction} from 'express';
 import productService from './product.service.js';
-import {validate} from '../../middlewares/validateRequest.js';
+import {validate} from '../../middlewares/validate.request.js';
 import {createProductSchema, updateProductSchema, productIdParamSchema} from './product.schemas.js';
 
 const router = express.Router();

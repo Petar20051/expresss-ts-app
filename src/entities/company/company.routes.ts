@@ -1,6 +1,6 @@
 import express from 'express';
 import companyService from './company.service.js';
-import {validate} from '../../middlewares/validateRequest.js';
+import {validate} from '../../middlewares/validate.request.js';
 import {createCompanySchema, updateCompanySchema, companyIdParamSchema} from './company.schemas.js';
 
 const router = express.Router();

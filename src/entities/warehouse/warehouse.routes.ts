@@ -1,6 +1,6 @@
 import express, {Request, Response, NextFunction} from 'express';
 import warehouseService from './warehouse.service.js';
-import {validate} from '../../middlewares/validateRequest.js';
+import {validate} from '../../middlewares/validate.request.js';
 import {createWarehouseSchema, updateWarehouseSchema, warehouseIdParamSchema} from './warehouse.schemas.js';
 
 const router = express.Router();

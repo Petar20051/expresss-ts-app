@@ -1,5 +1,5 @@
-import models from '../../db/modelsInit.js';
-import {AppError} from '../../errors/appError.js';
+import models from '../../db/models.init.js';
+import {AppError} from '../../errors/app.error.js';
 import {CreateUserDto, UpdateUserDto} from './user.types.js';
 
 class UserService {
