@@ -7,8 +7,13 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 	if (err instanceof ZodError) {
 		return res.status(400).json({
 			message: 'Validation error',
+			errors: err.issues.map((e) => ({
+				path: e.path.join('.'),
+				message: e.message,
+			})),
 		});
 	}
+
 	if (err instanceof UniqueConstraintError) {
 		return res.status(400).json({message: 'Duplicate entry'});
 	}

@@ -1,16 +1,15 @@
 import {z} from 'zod';
 
 export const orderIdParamSchema = z.object({
-	id: z.uuid(),
+	id: z.uuid('Invalid UUID'),
 });
 
 export const createOrderSchema = z.object({
-	companyId: z.uuid(),
-	orderType: z.enum(['shipment', 'delivery']),
-	partnerId: z.uuid().nullable().optional(),
-	warehouseId: z.uuid(),
+	companyId: z.uuid('Company ID must be a valid UUID'),
+	orderType: z.enum(['shipment', 'delivery'], 'Invalid type'),
+	partnerId: z.uuid('Partner ID must be a valid UUID'),
+	warehouseId: z.uuid('Warehouse ID must be a valid UUID'),
 	notes: z.string().optional(),
-	modifiedByUserId: z.string().uuid(),
 });
 
 export const updateOrderSchema = createOrderSchema.partial();
