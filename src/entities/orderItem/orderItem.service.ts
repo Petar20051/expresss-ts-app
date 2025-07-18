@@ -1,6 +1,13 @@
+import {Transaction} from 'sequelize';
 import models from '../../db/models.init.js';
+import sequelize from '../../db/sequelize.js';
 import {AppError} from '../../errors/app.error.js';
 import {CreateOrderItemDto, UpdateOrderItemDto} from './orderItem.types.js';
+import {
+	validateOrderProductCompanyMatch,
+	validateShipmentStockAvailability,
+	validateWarehouseSupportsProductType,
+} from './orderItem.validators.ts.js';
 
 class OrderItemService {
 	constructor(private readonly orderItemModel = models.OrderItem) {}
@@ -16,7 +23,13 @@ class OrderItemService {
 	}
 
 	async createOrderItem(data: CreateOrderItemDto) {
-		return await this.orderItemModel.create(data);
+		return await sequelize.transaction(async (transaction: Transaction) => {
+			await validateWarehouseSupportsProductType(data, transaction, models);
+			await validateOrderProductCompanyMatch(data, transaction, models);
+			await validateShipmentStockAvailability(data, transaction, models);
+
+			return await this.orderItemModel.create(data, {transaction});
+		});
 	}
 
 	async updateOrderItem(id: string, data: UpdateOrderItemDto) {

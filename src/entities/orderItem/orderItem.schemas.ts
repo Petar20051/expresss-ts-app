@@ -7,7 +7,7 @@ export const orderItemIdParamSchema = z.object({
 export const createOrderItemSchema = z.object({
 	orderId: z.uuid(),
 	productId: z.uuid(),
-	quantity: z.number().int().positive(),
+	quantity: z.number().positive(),
 	unitPrice: z.number().positive(),
 });
 
