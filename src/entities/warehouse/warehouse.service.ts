@@ -11,7 +11,7 @@ class WarehouseService {
 
 	async getWarehouseById(id: string) {
 		const warehouse = await this.warehouseModel.findByPk(id);
-		if (!warehouse) throw new AppError('Warehouse not found');
+		if (!warehouse) throw new AppError('Warehouse not found', 404);
 		return warehouse;
 	}
 

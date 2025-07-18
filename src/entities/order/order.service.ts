@@ -11,7 +11,7 @@ class OrderService {
 
 	async getOrderById(id: string) {
 		const order = await this.orderModel.findByPk(id);
-		if (!order) throw new AppError('Order not found');
+		if (!order) throw new AppError('Order not found', 404);
 		return order;
 	}
 

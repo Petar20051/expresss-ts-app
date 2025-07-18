@@ -1,11 +1,21 @@
 import {ErrorRequestHandler} from 'express';
 import {ZodError} from 'zod';
 import {AppError} from '../errors/app-error.js';
+import {ForeignKeyConstraintError, UniqueConstraintError} from 'sequelize';
 
 export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
 	if (err instanceof ZodError) {
 		return res.status(400).json({
 			message: 'Validation error',
+		});
+	}
+	if (err instanceof UniqueConstraintError) {
+		return res.status(400).json({message: 'Duplicate entry'});
+	}
+
+	if (err instanceof ForeignKeyConstraintError) {
+		return res.status(400).json({
+			message: 'Invalid reference: related entity not found',
 		});
 	}
 

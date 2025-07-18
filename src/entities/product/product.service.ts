@@ -13,7 +13,7 @@ class ProductService {
 
 	async getProductById(id: string) {
 		const product = await this.productModel.findByPk(id);
-		if (!product) throw new AppError('Product not found');
+		if (!product) throw new AppError('Product not found', 404);
 		return product;
 	}
 

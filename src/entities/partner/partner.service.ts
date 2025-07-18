@@ -13,7 +13,7 @@ class PartnerService {
 
 	async getPartnerById(id: string) {
 		const partner = await this.partnerModel.findByPk(id);
-		if (!partner) throw new AppError('Partner not found');
+		if (!partner) throw new AppError('Partner not found', 404);
 		return partner;
 	}
 

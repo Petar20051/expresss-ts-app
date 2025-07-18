@@ -19,7 +19,7 @@ module.exports = {
         companyId: 'e5adcec8-9fd6-4391-8d24-b7631a34eae3',
         orderType: 'shipment',
         partnerId: 'd1f7c9ae-2e1c-41fd-820a-49c0f0707ba1',
-        warehouseId: 'b2eb9246-f6f6-42a2-8e24-145225fbba91',
+        warehouseId: '1dd56d13-3630-49ac-9906-dfa75e5c02e4',
         notes: 'Urgent shipment of 50 units',
         date: new Date('2025-07-01T10:00:00Z'),
         createdAt: new Date(),

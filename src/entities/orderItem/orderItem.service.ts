@@ -11,7 +11,7 @@ class OrderItemService {
 
 	async getOrderItemById(id: string) {
 		const item = await this.orderItemModel.findByPk(id);
-		if (!item) throw new AppError('Order item not found');
+		if (!item) throw new AppError('Order item not found', 404);
 		return item;
 	}
 

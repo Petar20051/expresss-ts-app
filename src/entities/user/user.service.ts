@@ -11,7 +11,7 @@ class UserService {
 
 	async getUserById(id: string) {
 		const user = await this.userModel.findByPk(id);
-		if (!user) throw new AppError('User not found');
+		if (!user) throw new AppError('User not found', 404);
 		return user;
 	}
 

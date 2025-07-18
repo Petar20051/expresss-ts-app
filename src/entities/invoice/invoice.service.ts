@@ -11,7 +11,7 @@ class InvoiceService {
 
 	async getInvoiceById(id: string) {
 		const invoice = await this.invoiceModel.findByPk(id);
-		if (!invoice) throw new AppError('Invoice not found');
+		if (!invoice) throw new AppError('Invoice not found', 404);
 		return invoice;
 	}
 
